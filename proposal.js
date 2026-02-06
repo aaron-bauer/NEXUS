@@ -1,5 +1,5 @@
 // ===== EDITABLE: Change the name here =====
-let personName = 'Shaleene'; // Change this to the person's name
+let personName = 'Delyne'; // Change this to the person's name
 // ==========================================
 
 let noClickCount = 0;
