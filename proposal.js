@@ -1,3 +1,5 @@
+console.log('✅ proposal.js script loaded and is executing.');
+
 // ===== EDITABLE: Change the name here =====
 let personName = 'Delyne'; // Change this to the person's name
 // ==========================================
@@ -288,16 +290,17 @@ window.addEventListener('load', () => {
      container.style.animation = 'slideUp 0.8s ease-out';
 });
 
-// Add event listeners once the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    const yesBtn = document.querySelector('#yesBtn');
-    const noBtn = document.querySelector('#noBtn');
+// --- Attach Event Listeners ---
+// This code runs after the HTML document has been parsed, so the buttons are guaranteed to exist.
+console.log('Attempting to attach button listeners...');
+const yesBtn = document.querySelector('#yesBtn');
+const noBtn = document.querySelector('#noBtn');
 
-   if (yesBtn && noBtn) {
-       yesBtn.addEventListener('click', handleYes);
-       noBtn.addEventListener('click', handleNo);
-         console.log('Button listeners attached successfully');
-   } else {
-       console.error("Yes or No button not found!");
-   }
-});
+if (yesBtn && noBtn) {
+    yesBtn.addEventListener('click', handleYes);
+    noBtn.addEventListener('click', handleNo);
+    console.log('✅ Button listeners attached successfully!');
+} else {
+    console.error('❌ Critical Error: Could not find #yesBtn or #noBtn. Listeners not attached.');
+    // If you see this error, it means the button IDs in index.html do not match the querySelector.
+}
