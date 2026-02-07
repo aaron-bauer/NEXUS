@@ -288,6 +288,22 @@ function createFireworks() {
 window.addEventListener('load', () => {
      const container = document.querySelector('.container');
      container.style.animation = 'slideUp 0.8s ease-out';
+
+     // ===== AUTO-START CELEBRATION (Second Template) =====
+     // Set music to start at 15 seconds
+     const audio = document.querySelector('#backgroundMusic');
+     if (audio) {
+         audio.currentTime = 15;
+     }
+
+     // Trigger celebration animations immediately
+     createConfetti();
+     playRoseAnimation();
+     playCelebrationSounds();
+     
+     // Ensure the success title has the correct name
+     const successTitle = document.querySelector('#successTitle');
+     if (successTitle) successTitle.textContent = `${personName}, You Make Me The Happiest Person! 🎉`;
 });
 
 // --- Attach Event Listeners ---
