@@ -1081,7 +1081,7 @@
 
 <body>
     <!-- Audio Player -->
-    <audio id="backgroundMusic" loop>
+    <audio id="backgroundMusic" loop autoplay onloadedmetadata="this.currentTime=15">
         <source src="./background-music.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -1197,23 +1197,30 @@
             alert('Could not load audio file. Check console for details.');
         });
 
+        // Sync UI with audio state
+        audio.addEventListener('play', () => {
+            isPlaying = true;
+            musicBtn.textContent = '⏸';
+            container.classList.add('music-active');
+            animateVisualizerBars();
+        });
+
+        audio.addEventListener('pause', () => {
+            isPlaying = false;
+            musicBtn.textContent = '♪';
+            container.classList.remove('music-active');
+        });
+
         function toggleMusic(event) {
             event.stopPropagation();
             if (isPlaying) {
                 audio.pause();
-                musicBtn.textContent = '♪';
-                container.classList.remove('music-active');
-                isPlaying = false;
             } else {
                 console.log('Attempting to play audio from:', audio.src);
                 audio.play().catch((error) => {
                     console.error('Playback error:', error);
                     console.log('Audio playback failed. Background music may be blocked by browser.');
                 });
-                musicBtn.textContent = '⏸';
-                container.classList.add('music-active');
-                isPlaying = true;
-                animateVisualizerBars();
             }
         }
 
@@ -1228,13 +1235,6 @@
 
             requestAnimationFrame(animateVisualizerBars);
         }
-
-        // Sync confetti with music beat
-        audio.addEventListener('timeupdate', () => {
-            if (isPlaying) {
-                animateVisualizerBars();
-            }
-        });
 
         // Auto-play music when page loads
         // The complex auto-play and function override logic has been removed
